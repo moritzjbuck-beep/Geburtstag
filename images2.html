@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Brief Animation</title>
+    <style>
+        body {
+            background-color: black;
+            font-family: sans-serif;
+            margin: 0;
+            background-image: url("https://static.vecteezy.com/system/resources/thumbnails/041/038/331/small/ai-generated-colorful-confetti-on-bokeh-background-photo.jpg");
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        /* SIDENAV */
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 10px 30px;
+            text-decoration: none;
+            font-size: 22px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover { color: #f1f1f1; }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 36px;
+        }
+
+        .open-btn {
+            font-size: 35px;
+            cursor: pointer;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            color: black; /* Schwarz, damit man es auf weißem Konfetti sieht */
+            z-index: 1500;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        /* BRIEF */
+        .envelope-wrapper {
+            position: relative;
+            width: 600px;
+            height: 400px;
+            background: #708090;
+            cursor: pointer;
+            margin-top: 250px;
+            transition: transform 1.0s;
+            z-index: 5;
+        }
+
+        .lid {
+            position: absolute;
+            top: 0; left: 0;
+            width: 0; height: 0;
+            border-left: 300px solid transparent;
+            border-right: 300px solid transparent;
+            border-top: 150px solid black;
+            transform-origin: top;
+            transition: transform 0.6s ease;
+            z-index: 10;
+        }
+
+        .letter {
+            position: absolute;
+            top: 150px; left: 10px;
+            width: 580px; height: 380px;
+            background: white;
+            z-index: 2;
+            transition: transform 0.8s ease, opacity 0.5s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            opacity: 0;
+        }
+
+        .envelope-wrapper.open .lid { transform: rotateX(180deg); z-index: 1; }
+        .envelope-wrapper.open .letter {
+            opacity: 1;
+            transform: translateY(-220px) scale(1.4);
+            z-index: 20;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        #animation-frame {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .hint {
+            margin-top: px;
+            color: black;
+            font-weight: bold;
+            text-align: center;
+            background: rgba(255,255,255,0.7);
+            padding: 10px;
+            border-radius: 10px;
+            
+        }
+    </style>
+</head>
+
+<body>
+
+    <script>
+        const pass = prompt("Bitte gib das Passwort ein:");
+        if (pass !== "1288OmaOpa") {
+            alert("Falsches Passwort!");
+            window.location.href = "https://sz-folien.de/wp-content/uploads/2020/03/Art-Nr.386-Smily-Mittelfinger-1.jpg";
+        }
+    </script>
+
+    <span class="open-btn" onclick="toggleNav()">&#9776; Menü</span>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">&times;</a>
+        <a href="index.html">Startseite</a>
+        <a href="images2.html">Bilder</a>
+        <a href="Festbaenkler.html">Festbänkler</a>
+    </div>
+
+    <div class="envelope-wrapper" id="envelope">
+        <div class="lid"></div>
+        <div class="letter">
+            <img id="animation-frame" src="Eishockey.jpg">
+        </div>
+    </div>
+
+    <div class="hint">
+        <p>1. Klick: Öffnen / Pause / Weiter</p>
+        <p>Doppelklick: Schließen & Stoppen</p>
+    </div>
+
+    <script>
+        const images = [
+            "Eishockey.jpg", "hintergrundPool.jpg", "Urlaub.jpg",
+            "UrlaubPapaJulia.jpg", "UrlaubFlorenz.jpg", "UrlaubBlue.jpg",
+            "UrlaubPool.jpg", "Mangenfest.jpg", "MusikEhrung.jpg",
+            "UrlaubMamaPapa.jpg", "PapaBlue.jpg", "background 0B4F8032-969C-4A9E-8DD6-098B9C2A9880.JPG",
+            "2D2BC092-F15D-4D42-8942-7005B0A97128.JPG", "0A087D02-D116-461E-A2BA-61982767852D.JPG",
+            "0B26A3E3-082F-4F0E-88F9-268683646F67.JPG", "0DE05FFC-169F-46F2-B398-24E54B463B14.JPG",
+            "0EB3E785-8742-40A7-8CA6-1FBF5138403A.JPG", "0F6C02A5-9556-4FA1-B42C-E327DDB49121.JPG",
+            "1D2CAE2C-EF3F-409D-949B-4288F6A2F1FF.JPG", "01EECC02-87D3-4C2D-8AE6-2936979F6F0A.JPG",
+            "2F2594BC-BE79-4589-8872-9236BE08BAD4.JPG", "03A0A609-2D02-4509-88F3-14B779AF4E8E.JPG",
+            "03C4FCEC-8741-41AA-8984-8940C31A630F.JPG", "3C43951F-DF57-4C31-B76B-418760F82F37.JPG",
+            "3F41060B-6442-440C-B237-24CFFAE2321F.JPG", "05AE34BD-FC4C-454D-B118-E2C8F7DD48AF.JPG",
+            "5B60EC42-2423-40C9-B09B-D4E8FE13B1CE.JPG", "5B719BA2-A086-4F97-BFC4-50FCFD531B86.JPG",
+            "5E534484-F3EF-4BDD-83B5-7CF704F75CA3.JPG", "5F154639-3D64-43B9-83BC-D26AB0CB61FD.JPG",
+            "6B4263AE-30DD-494D-9034-E87A85DF1EBC.JPG",
+            "6F380A15-CD59-49FD-8F02-F6A0044F4587.JPG", "7A01FB66-6A4B-4BFC-B1DE-C59B9DE629EA.JPG",
+            "7C925871-C47D-434A-B3CA-9354C2AE0240.JPG", "7CE43DBF-6727-4FD8-B5DA-C3FDCC932E9E.JPG",
+            "7DBB0342-05B7-4959-B37C-683F7DCFAC5A.JPG", "7E847356-0366-4B4E-AE3C-457833F1CF57.JPG",
+            "7EFC55D1-A598-4A59-9DAD-1FBFEC5A76AA.JPG", "7F3192E7-E5BD-48F2-BEA0-0006209665A7.JPG",
+            "7FC70C36-E2BB-466D-8235-460548F9E9E6.JPG", "8A3E03C1-24A9-47EB-8163-091BEE2D0547.JPG",
+            "8B867A6A-C030-43BE-87EA-78F7283303F1.JPG", "8B780349-65DA-43A9-9D4B-B2F2D383F03F.JPG",
+            "8C26939B-387A-4CEF-BDCF-2A28194F3483.JPG", "8D8A30AA-9722-46DA-B4A8-131FFC92AE6C.JPG",
+            "8D665453-FF55-4D93-91B1-04D6F75D2B1C.JPG", "8E6B7D63-2EC3-40BD-AA8F-6FFFD2D8E081.JPG",
+            "8EA3D8F2-980E-45D5-8ECF-F6A37A0A49F2.JPG", "8FA0CB7D-6A8B-4D81-8303-752A7E8A2052.JPG",
+            "9A01FE58-A396-42FC-906E-2D7162A88F35.JPG", "9A6503F1-4FB0-4E41-934F-18765A4A02FB.JPG",
+            "9CF94225-79F2-4046-80F0-1CC49E25976C.JPG", "9D4C1B67-3D94-4573-87E2-CA3E80F1EC42.JPG",
+            "9D60D609-BA14-4A6E-81EC-452819AF9532.JPG", "9D455CE2-58FC-4947-A7EB-E9C08FB0EF8F.JPG",
+            "9E90695D-247A-4274-8202-05D4BCAB262C.JPG", "9F6FFF5E-B5A6-4C85-9066-1CBFEA7D3EDD.JPG",
+            "10BB7D93-0743-482B-8A53-9102AD024D9E.JPG", "014A2B24-CA3E-44C6-B74A-A893E9094E55.JPG",
+            "19FDB588-7372-4787-94A7-96C75985F911.JPG", "20F5FDB4-3D4D-466A-9D74-90E093AFAD41.JPG",
+             "29F5B669-B7CD-4B3D-AD5B-D0A82965B7E9.JPG",
+            "31A6E424-92EA-44D7-8AB3-17B043E0DD3A.JPG", "32C588E4-B785-4202-B8EC-13CCCF7388AB.JPG",
+            "34EF4E05-551C-4011-AA2A-AE69EEFC7D15.JPG", "43A04DCC-79A2-426D-89A5-7F2BBF0E620B.JPG",
+            "47C74ACA-632C-4B3D-A00E-141176B1B843.JPG", "48F5E2AA-6264-460F-B33F-0A48371C1479.JPG",
+            "059B3261-E7DA-48A4-9292-012E358FC167.JPG", "68C43ADA-9A3D-4C27-BFF8-6A8757FE0E50.JPG",
+            "69DFE2F8-CC25-4F61-867A-D0185BDAD041.JPG", "75A4B4E4-CE2E-4A96-B936-973FF3CBECBA.JPG",
+            "78E9BB10-4BA9-4F48-8654-C553144C9473.JPG", "78F88AF8-0EC5-4FB7-9305-1101E3AF9A1A.JPG",
+            "81DFE8C1-C0CB-4A51-BA4E-833025CD9117.JPG", "82CE9CDE-5F2B-4718-8726-EE9ADD936C78.JPG",
+            "83AA44F1-49C5-4218-A06D-A55BDD5E5EAD.JPG", "92F53A53-FA55-44D4-881B-E4E806565F6B.JPG",
+            "171A5D46-4898-4DAB-B154-A04ED403E369.JPG", "299F1577-C4CA-4F91-8F63-57AE4D1404E6.JPG",
+            "340BA10D-4320-48A5-966E-E7F23EBBF47D.JPG", "373C99CC-0A9B-4A96-8D74-456ABFAAEF10.JPG",
+            "375D1899-2AAF-40E1-9FED-580029B99B15.JPG", "387D2A00-AAD1-4FE9-BBBB-1F37B93719F3.JPG",
+            "438B4551-9C67-47D2-BE37-27C81E83E2E9.JPG", "467EE39B-C1CB-4ADD-81B4-751EB604375E.JPG",
+            "468B3749-4958-440A-8BAE-7955B264CFD9.JPG", "632F5446-5311-43A8-9703-DA0484C72875.JPG",
+            "641A67ED-9502-45E8-B0AA-3AC841E4BFAC.JPG", "648B66E1-ED2E-45F4-87A9-E2D77F6ABBAD.JPG",
+            "707F4287-DAD1-4B7A-BFB2-DD5CA964E85D.JPG", "732BFBA8-4252-4182-80E7-322B82825723.JPG",
+            "833DEF34-CD54-4478-B6DA-DACA5E6E9C7C.JPG", "0862E149-369C-4767-B2AF-3C9C7F026B3A.JPG",
+            "867AA891-5435-4601-A0F7-064C198E0146.JPG", "890D663D-4948-4AF0-9D3B-D36AAC8F6317.JPG",
+            "936A16EE-8287-4943-A873-566F442ED50A.JPG", "983D9DC4-6802-429F-BDB6-9C9A88558D4D.JPG",
+            "1854C9AE-568B-4C82-B698-7F7D76864A50.JPG", "3068E3DD-5821-4EB0-8586-450DF5421618.JPG",
+            , "3751A535-0189-4764-9C88-1566EE6A2E9C.JPG",
+            "4952A734-BE2F-4C88-8E6A-1C302EEB36B6.JPG", "5529CAD6-979E-4FD5-813B-E619BA8BDDFD.JPG",
+            "6936F09E-FD30-453D-8AF2-9AF183FFBA6C.JPG", "7357DAB1-3030-4255-8B00-31A6E5FE1DB9.JPG",
+            "7549B705-B61C-49B3-8F10-51E08E9428EA.JPG", "7669C2AE-6D8E-43E0-8B05-C0B6E6F0809D.JPG",
+            "9997ED86-3AC9-4BE4-8851-60EB679A0D45.JPG", "12137E94-39B6-48A0-9522-0A751631EB60.JPG",
+            "13332F85-98E7-4AEF-B611-E103E0A03944.JPG", "37857BF9-4734-4244-8B5B-A16E67AEE907.JPG",
+            "42838A26-89EA-47C1-AD73-16392C8CBF00.JPG", "73650ADB-4FC6-4785-8B90-508D31CB1803.JPG",
+            "140501B1-A389-494B-B84C-F047F33E2411.JPG", "143877A3-076D-4386-8AD8-90E80F4A142E.JPG",
+            "365609FA-2C2F-493B-800C-7C802AF8BAEA.JPG", "415505D3-D251-45CE-AB0D-95EB41FD8D35.JPG",
+            "629808F9-2948-4DBA-B769-8997C655839F.JPG", "741748AF-E939-4361-86AE-5A600F048E9F.JPG",
+            "963529C2-420F-4553-AFA0-7C0C77CDDA82.JPG", "7164664A-487F-4341-8B20-A75D5129865F.JPG",
+            "20180406_094859.jpg", "20775756-2F0D-4C60-850C-D36E562002C1.JPG",
+            "38871851-73C3-4015-9DFD-5922AE95A72D.JPG", "60072013-1C77-4A69-B80A-816C7042F2E6.JPG",
+            "77875222-7660-45A3-86C1-CA53A67ED69A.JPG", 
+            "A51C0174-DA10-4FBA-BB7C-1C51F02EA903.JPG", "A581FF02-AB14-41DC-8E41-21BC0267F176.JPG",
+            "A650E3A5-E371-4630-9F0A-6B4794F4E553.JPG", "A72346CB-A47F-4C46-A7A4-60893A47A0FC.JPG",
+            "A1359567-A30F-460B-8215-90B3C957D50F.JPG", "AAE1BCA2-5D69-42CF-870C-197BBCEE5058.JPG",
+            "ABI.jpg", "AC774FCF-59D3-44A2-9F22-4B0CFB97CFE6.JPG", 
+            "ADB3B442-D1E7-4A3C-91D6-80280AF3FA7E.JPG", "AEA1F787-F426-46F2-8C93-04AB28A205ED.JPG",
+            "B1D0A873-D289-4C13-9102-D7B5581C9819.JPG", "B2A1DAAF-93E8-4A26-B4D8-3DF5B8B08E65.JPG",
+            "B08FCDA5-B76C-4F74-918B-7D2710A4CA2A.JPG", "B9A5022D-C552-4828-B6F6-A795917DE8B2.JPG",
+            "B9B707FE-9E11-45C9-B0FA-2BAE9D10C987.JPG", "B19C578C-A46F-44D6-8827-416198E84AEA.JPG",
+            "B41F9025-87AF-4B7B-9F11-4289B162435E.JPG", "B80F5CA7-0CE4-454D-AAF4-19A09B65BA76.JPG",
+            "B81E9224-0A9F-4CEA-A6A0-FE47D8ABB33F.JPG", "B90EE82A-3924-45D3-994B-A8FCF4301221.JPG",
+            "B571E513-08EF-4B72-B57E-9F62DE870872.JPG", "B665EBB3-F88B-4752-8742-920D0054A640.JPG",
+            "BBCF45BA-2A63-431D-822E-796E48C6BC4F.JPG", ,
+            "Buck-Familie-2013-8821.jpg", "Buck-Familie-2013-8824.jpg", "Buck-Familie-2013-8831.jpg",
+            "Buck-Familie-2013-8833.jpg", "Buck-Familie-2013-8840.jpg", "Buck-Familie-2013-8868 2.jpg",
+            "Buck-Familie-2013-8868.jpg", "Buck-Familie-2013-8991.jpg", "Buck-Familie-2013-8996.jpg",
+            "Buck-Familie-2013-9001.jpg", "Buck-Familie-2013-9005.jpg", "Buck-Familie-2013-9026.jpg",
+            "Buck-Familie-2013-9027.jpg", "C47EE056-3481-48C1-8E5C-2AAD9722EF08.JPG",
+            "C77CEC15-24D0-4196-8BD9-4C6CA3553031.JPG", "CA9E6D1B-AB37-4C5F-A29E-EC4CAD06C4FB.JPG",
+            "CC6B097D-D5C7-41FE-A570-000CF0963B44.JPG", "CE59C206-2F35-46CD-8F97-FEA8441EB631.JPG",
+            "D0C93439-A65D-4345-AF47-BFEADA68252D.JPG", "D1C7E990-3E39-4A21-ACFE-D6DDA8A0C2BA.JPG",
+            "D7CF97C4-D050-49C3-A8FB-1D5FF30ED6FA.JPG", "D8A94967-1FE8-4505-80AF-68BEC1132BB1.JPG",
+            "D8CE9337-DEB4-42B5-84EE-2CBC05C8808D.JPG", "D51B678E-3157-4B61-9527-E92DA53FD6EE.JPG",
+            "D127A79C-3335-407B-8D5F-D065BF73F085.JPG", "D9301BDC-A1B9-4A79-A833-21DCF59CD52F.JPG",
+            "DA8B2628-F67C-4FC1-9C72-6B1C47D513F1.JPG", "DAD6FEA2-D510-4E70-BEFB-3F08E2B0DF3F.JPG",
+            "DB9713F4-91A2-4574-A1DE-336AD8731BD0.JPG", "DC4CFE94-E7F6-45DE-81F5-8E929A04BFEF.JPG",
+            "DD3FEF36-D45C-48EC-9E26-5D2B4EEF6FC2.JPG", "DD05A1BA-23EF-4B4C-B206-90D9FA5A6DC6.JPG",
+            "DDF15AEC-6831-4526-BA68-1509A1087D1D.JPG", "DSC_0043.JPG", "DSC_0066_9.JPG",
+            "DSC_0117_6.JPG", "DSC08187.JPG", "DSC08191.JPG", "DSC08227.JPG", "DSC08231.JPG",
+            "DSC08233.JPG", "DSC08234.JPG", "DSC08235.JPG", "DSC08236.JPG", "DSC08237.JPG",
+            "DSC08239.JPG", "DSC08243.JPG", "DSC08248.JPG", "DSC08249.JPG", "DSC08251.JPG",
+            "DSC08252.JPG", "DSC08253.JPG", "DSC09991.JPG", "DSC09993.JPG", "DSC09995.JPG",
+            "DSC09996.JPG", "E4E5830C-7A66-4EE0-8D86-A5EC972C49BB.JPG", "E7BF53BC-41DE-4A8F-A03E-15F8AB010390.JPG",
+            "E8EBDA37-CB5A-4EDB-87C3-49A4B7F5FCEA.JPG", 
+            "E71BA410-ECB9-4FFE-9660-36FE74DE214D.JPG", "E91AFD6C-62AE-4102-AB23-844798F8ECBE.JPG",
+            "E93BC850-1C96-447E-A47D-C06B1D3F71CD.JPG", "E96F9327-7AA9-4103-940F-11DD6E3F42F8.JPG",
+
+            "E410048E-8314-415A-92CD-4E70D93C4E8C.JPG", "EE1EC169-EE7A-4A27-B3A2-08F50D29C27C.JPG",
+            "Eishockey.jpg", "F1ABA136-10FB-4A24-A364-514FC9AA241A.JPG", "F264F66F-6DA9-4D3E-8A62-715B2246264E.JPG",
+            "F295A336-3A69-48BB-885F-AC435FCEEF5B.JPG", "FA04B7C1-0B87-4677-8710-B9DF1FCEC780.JPG",
+            "FC22C538-AA25-4BC1-AF4E-841907345B49.JPG"
+        ]; file:///Users/moritzbuck/Documents/GitHub/Website%20/E40A9CA3-7C08-4D72-812D-ED911F352FCE.JPG file:///Users/moritzbuck/Documents/GitHub/Website%20/E5047F4B-9486-4CBE-B482-E02E3C988729.JPG
+        let currentIndex = 0;
+        let isPlaying = false;
+        let intervalId = null;
+        const wrapper = document.getElementById('envelope');
+        const imgElement = document.getElementById('animation-frame');
+
+        function startVideo() {
+            if (!intervalId) {
+                isPlaying = true;
+                intervalId = setInterval(() => {
+                    currentIndex = (currentIndex + 1) % images.length;
+                    imgElement.src = images[currentIndex];
+                }, 1500); // 1.5 Sekunden pro Bild
+            }
+        }
+
+        function pauseVideo() {
+            clearInterval(intervalId);
+            intervalId = null;
+            isPlaying = false;
+        }
+
+        wrapper.addEventListener('click', () => {
+            if (!wrapper.classList.contains('open')) {
+                wrapper.classList.add('open');
+                startVideo();
+            } else {
+                if (isPlaying) {
+                    pauseVideo();
+                } else {
+                    startVideo();
+                }
+            }
+        });
+
+        wrapper.addEventListener('dblclick', (e) => {
+            e.stopPropagation();
+            wrapper.classList.remove('open');
+            pauseVideo();
+            currentIndex = 0;
+            imgElement.src = images[0];
+        });
+
+        function toggleNav() {
+            var nav = document.getElementById("mySidenav");
+            if (nav.style.width === "250px") {
+                nav.style.width = "0";
+            } else {
+                nav.style.width = "250px";
+            }
+        }
+    </script>
+</body>
+
+</html>
