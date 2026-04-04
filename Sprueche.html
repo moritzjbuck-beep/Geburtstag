@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menü Vorlage</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        /* --- CSS FÜR DIE SEITENLEISTE --- */
+        .sidenav {
+            height: 100%;
+            width: 0; /* Startbreite */
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+        }
+
+        .sidenav a {
+            padding: 10px 30px;
+            text-decoration: none;
+            font-size: 22px;
+            color: white;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .sidenav a:hover {
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 36px;
+        }
+
+        /* --- CSS FÜR DEN MENÜ-BUTTON --- */
+        .open-btn {
+            font-size: 30px;
+            cursor: pointer;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            color: white;
+            z-index: 1500;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 5px 15px;
+            border-radius: 5px;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+
+    <span class="open-btn" onclick="toggleNav()">&#9776; Menü</span>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">&times;</a>
+        <a href="index.html">Startseite</a>
+        <a href="images2.html">Bilder</a>
+        <a href="Festbaenkler.html">Festbänkler</a>
+        </div>
+
+    <div style="padding: 100px 20px; text-align: center;">
+        <h1>Diese Seite hat jetzt eine Seitenleiste</h1>
+        <p>Klicke oben links auf "Menü", um die Leiste zu öffnen.</p>
+    </div>
+
+    <script>
+        function toggleNav() {
+            var nav = document.getElementById("mySidenav");
+            if (nav.style.width === "250px") {
+                nav.style.width = "0";
+            } else {
+                nav.style.width = "250px";
+            }
+        }
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+
+    <script>
+        const passwort = prompt("Bitte gib das Passwort ein, um die Bilder zu sehen:");
+        if (passwort !== "1288OmaOpa") {
+            alert("Falsches Passwort!");
+            window.location.href = "https://sz-folien.de/wp-content/uploads/2020/03/Art-Nr.386-Smily-Mittelfinger-1.jpg";
+        }
+    </script>
+
+
+
+
+
+
+</body>
