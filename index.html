@@ -14,6 +14,7 @@
             background-color: dimgray;
             background-image: url("https://img.freepik.com/premium-vector/birthday-card-with-balloons-black-background-with-words-happy-birthday-it_1163553-5608.jpg?semt=ais_incoming&w=740&q=80");
             background-size: cover;
+            background-position: center; /* NEU: Bild bleibt mittig */
             display: flex;
             flex-direction: column;
             
@@ -128,6 +129,27 @@
             margin-left: 160px;
         }
 
+        /* --- NEU: ANPASSUNG FÜR HANDYS --- */
+        @media (max-width: 768px) {
+            h1 {
+                margin-left: 20px;
+                font-size: 45px;
+                margin-top: 200px;
+            }
+            h2 {
+                margin-left: 40px;
+                font-size: 50px;
+            }
+            #tipp-box {
+                margin-left: 20px;
+            }
+            .music-control-btn {
+                margin-left: 20px;
+            }
+            #tipp-text {
+                max-width: 80%;
+            }
+        }
       
     </style>
 </head>
@@ -143,8 +165,6 @@
         <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">&times;</a>
         <a href="images2.html">Bilder</a>
         <a href="Festbaenkler.html">Geburtstagsgeschenk</a>
-      
-    
     </div>
 
     <h1>Happy </h1>
