@@ -2,6 +2,7 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bilder - Fäaschtbänkler</title>
     <style>
         body {
@@ -111,7 +112,23 @@
         }
 
         .Biler-Fästbänkler {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* --- NEU: ANPASSUNG FÜR HANDYS --- */
+        @media (max-width: 768px) {
+            .picture1, .picture2 {
+                width: 90%; /* Bild nutzt fast die volle Breite */
+                max-width: 400px;
+                margin-left: 0; /* Entfernt die seitliche Verschiebung */
+                margin-top: 50px; /* Weniger Abstand oben auf kleinen Bildschirmen */
+            }
             
+            #tipp-text {
+                max-width: 80%;
+            }
         }
     </style>
 </head>
@@ -135,7 +152,6 @@
         <a href="javascript:void(0)" class="closebtn" onclick="toggleNav()">&times;</a>
         <a href="index.html">Startseite</a>
         <a href="images2.html">Bilder</a>
-        
     </div>
 
     <div id="tipp-box">
