@@ -131,6 +131,10 @@
 
 <body>
 
+    <audio id="bg-music" loop>
+        <source src="Stevie Wonder - Happy Birthday - Aldo Grandjean (128k).mp3" type="audio/mpeg">
+    </audio>
+
     <script>
         const pass = prompt("Bitte gib das Passwort ein:");
         if (pass !== "1288OmaOpa") {
@@ -156,12 +160,11 @@
     </div>
 
     <div class="hint">
-        <p>1. Klick: Öffnen / Pause / Weiter</p>
-        <p>Doppelklick: Schließen & Stoppen</p>
+        <p>1. Klick: Öffnen & Musik / Pause / Weiter</p>
+        <p>Doppelklick: Schließen & Musik Stopp</p>
     </div>
 
     <script>
-        // Bereinigte Liste deiner Bilder
         const images = [
             "Eishockey.jpg", "hintergrundPool.jpg", "Urlaub.jpg",
             "UrlaubPapaJulia.jpg", "UrlaubFlorenz.jpg", "UrlaubBlue.jpg",
@@ -271,10 +274,13 @@
         let intervalId = null;
         const wrapper = document.getElementById('envelope');
         const imgElement = document.getElementById('animation-frame');
+        const music = document.getElementById('bg-music');
 
         function startVideo() {
             if (!intervalId) {
                 isPlaying = true;
+                music.play().catch(e => console.log("Musik-Autoplay blockiert."));
+                
                 intervalId = setInterval(() => {
                     currentIndex = (currentIndex + 1) % images.length;
                     imgElement.src = images[currentIndex];
@@ -286,6 +292,7 @@
             clearInterval(intervalId);
             intervalId = null;
             isPlaying = false;
+            music.pause();
         }
 
         wrapper.addEventListener('click', () => {
@@ -297,6 +304,7 @@
                     pauseVideo();
                 } else {
                     startVideo();
+                    music.play();
                 }
             }
         });
@@ -305,17 +313,15 @@
             e.stopPropagation();
             wrapper.classList.remove('open');
             pauseVideo();
+            music.pause();
+            music.currentTime = 0;
             currentIndex = 0;
             imgElement.src = images[0];
         });
 
         function toggleNav() {
             var nav = document.getElementById("mySidenav");
-            if (nav.style.width === "250px") {
-                nav.style.width = "0";
-            } else {
-                nav.style.width = "250px";
-            }
+            nav.style.width = (nav.style.width === "250px") ? "0" : "250px";
         }
     </script>
 </body>
